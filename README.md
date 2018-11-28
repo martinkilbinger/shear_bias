@@ -36,7 +36,26 @@ You might have to use `sudo` in front of the setup command, if you have the root
 Alternatively, you can install the package from within a virtual environment, or use
 the option `--prefix DIR` to install it in a directory `DIR` of your choice.
 
+### External programs and libraries
+
+The following packages should be installed:
+  - `galsim` program
+  - `shapelens` library
+    Its installation requires the `cfitsio' and `tmv` libraries
+
 ## Content
+
+  - `shear_bias`
+    Python scripts with the shear_bias module functions and classes.
+  - `notebooks`
+    Jupyter notebooks and auxilliary files
+    - `shear_bias_example.ipynb`
+      Example notebook using galsim and KSB-shapelens
+    - `config/galsim`
+      Galsim configuration files (.yaml, to use with galsim on the command line)
+    - `src`
+      Contains `get_shapes.cc`, the source file for the KSB-shapelens executable.
+
 
 ## Reference
 
