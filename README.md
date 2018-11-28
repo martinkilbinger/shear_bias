@@ -3,21 +3,17 @@
 `shear_bias` is a package that contains tools and scripts for shear bias
 estimation for weak gravitational lensing analysis.
 
-## Authors:
+## Information
 
-  - Martin Kilbinger `(martin.kilbinger@cea.fr) <martin.kilbinger@cea.fr>`
-  - Arnau Pujol
+### Authors
+  - Martin Kilbinger `martin.kilbinger@cea.fr`
+  - Arnau Pujol `arnaupv@gmail.com`
 
 Version: 0.1
 
 Date: November 2019
 
-Documentation: |link-to-docs|
-
-.. |link-to-docs| raw:: html
-
-  <a href="https://github.com/martinkilbinger/ede18_shear_cal/shear_bias"
-  target="_blank">https://github.com/martinkilbinger/ede18_shear_cal/shear_bias</a>
+Documentation: TBD
 
 ## Installation
 
@@ -25,7 +21,7 @@ Download the code from the `github` repository.
 
 ```bash
 
-git clone https://github.com/martinkilbinger/ede18_shear_cal/shear_bias
+git clone https://github.com/martinkilbinger/shear_bias
 ```
 
 A directory `shear_bias` is created. There, call the setup script to install the

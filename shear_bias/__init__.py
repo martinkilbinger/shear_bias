@@ -6,6 +6,8 @@ Shear bias estimation tools
 
 """
 
+from __future__ import print_function
+
 from . import *
 from .info import __version__, __whoami__
 

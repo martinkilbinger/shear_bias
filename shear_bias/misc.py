@@ -12,7 +12,6 @@ This module contains misc methods.
 
 """
 
-from __future__ import print_function
 import os
 import subprocess
 import shlex
@@ -26,10 +25,10 @@ class param:
     def __init__(self, **kwds):
         self.__dict__.update(kwds)
 
-    def print(self, **kwds):
+    def print_vars(self, **kwds):
         print(self.__dict__)
 
-    def var_list(self, **kwds):
+    def get_vars(self, **kwds):
         return vars(self)
 
 

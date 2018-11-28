@@ -15,7 +15,6 @@ using galsim
 """
 
 
-from __future__ import print_function
 import os
 import sys
 
@@ -81,6 +80,10 @@ def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, outp
 
     print('*** Start create_all_sims_great3 ***')
 
+    for fname in [config_path, config_psf_path]:
+        if not os.path.exists(fname):
+            raise IOError('galsim config file {} not found'.format(fname))
+
     extra_str = ''
     if nfiles is not None:
         extra_str = '{} output.nfiles={}'.format(extra_str, nfiles)
@@ -92,7 +95,7 @@ def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, outp
         
         n_out_missing = count_missing_files('{}/{}'.format(output_dir, output_gal_fname_format), nfiles)
         if n_out_missing > 0:
-            print('For shear ({},{}), {} images are missing, running galsim'.format(g[0], g[1], n_out_missing))
+            print('For shear ({},{}), {} images need to be created, running galsim'.format(g[0], g[1], n_out_missing))
             create_sim_one_shear_great3(g, config_path, input_dir, output_dir, \
                                         extra_str, output_gal_fname_format, nxy_tiles=nxy_tiles, job=job)
         else:
@@ -103,7 +106,7 @@ def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, outp
     outdir_psf = '{}/psf'.format(output_base_dir)
     n_out_missing = count_missing_files('{}/{}'.format(outdir_psf, output_psf_fname_format), nfiles)
     if n_out_missing > 0:
-        print('{} PSF images are missing, running galsim'.format(n_out_missing))
+        print('{} PSF images need to be created, running galsim'.format(n_out_missing))
         galsim_command = 'galsim {0} input.catalog.dir={1} input.dict.dir={1} output.dir={2} output.file_name.format={3}{4}'. \
             format(config_psf_path, input_dir, outdir_psf, output_psf_fname_format, extra_str)
         misc.run_command(galsim_command, job=job)

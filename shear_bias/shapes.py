@@ -15,8 +15,6 @@ of galaxy images using shapelens.
 """
 
 
-from __future__ import print_function
-
 import os
 import numpy as np
 
@@ -127,6 +125,8 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
 
     results = {}
 
+    count_PSF = 0
+    count_gal = 0
     for step in g_dict:
 
         dir_name_shear = get_dir_name_shear(g_dict[step])
@@ -146,7 +146,7 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
             # Galaxy parameters
             data = np.loadtxt(input_result_path, usecols = (0,3,4,5,6))
             if data.shape[0] == 0:
-               raise IndexError('Data file \'{}\' with zero lines found'.format(input_result_path))
+               raise IndexError('Data file \'{}\' with zero lines found.\nYou may want to delete this file and re-run the shape measurment.'.format(input_result_path))
 
             #print('File {}, data dim {}'.format(input_result_path, data.shape))
             final_gal_id = np.append(final_gal_id, data[:,0])
@@ -154,6 +154,8 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
             final_e2     = np.append(final_e2, data[:,2])
             out_scale    = np.append(out_scale, data[:,3])
             out_sn       = np.append(out_sn, data[:,4])
+
+            count_gal = count_gal + 1
 
             # PSF parameters
             # pse_file = psf_path + 'starfield_image-' + file_list[0][-7:-4] + '-0.cat' #TODO change to subfield_image
@@ -166,6 +168,9 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
                 out_beta, out_q = g2bq(final_e1, final_e2)
                 out_beta = correct_radians(out_beta)
                 final_ep, final_ex = e12_2_epx(final_e1, final_e2, psf_theta)
+
+                count_PSF = count_PSF + 1
+
             else:
                 out_beta = []
                 out_q    = []
@@ -174,6 +179,9 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
 
         results[step] = gal_par.from_values(final_gal_id, final_e1, final_e2, out_scale, \
                 out_sn, out_beta, out_q, final_ep, final_ex)
+
+    print('Read {} files with measured galaxy properties including shapes.'.format(count_gal))
+    print('Read {} files with PSF shapes.'.format(count_PSF))
 
     print('*** End all_read_shapelens ***')
 
