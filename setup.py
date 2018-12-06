@@ -76,12 +76,6 @@ class CMakeBuild(build_ext):
         subprocess.check_call(['cmake', '--build', '.'] + build_args,
                               cwd=self.build_temp)
 
-        # For some reason, the shapelens library is linked with a relative path. Change to
-        # to absolute path so dynamic library is found when running get_shapes.
-        call = ['install_name_tool', 'get_shapes', '-change', 'lib/libshapelens.dylib', 
-                '{}/lib/libshapelens.dylib'.format(os.environ['CMAKE_PREFIX_PATH'])]
-        print('== Running install_name_tool to set absolute path to shapelens library')
-        subprocess.check_call(call, cwd=self.build_temp)
         print('')  # Add an empty line for cleaner output
 
 home = os.environ['HOME']
