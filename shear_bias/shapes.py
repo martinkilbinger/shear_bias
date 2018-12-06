@@ -125,7 +125,7 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles, nobj_per_file_e
 
     print('*** Start all_read_shapelens ***')
 
-    msg_rerun = '\nYou may want to delete this file and re-run the shape measurment.'
+    msg_rerun = '\nYou may want to delete this file and re-run the shape measurement.'
 
     results = {}
 
@@ -157,9 +157,9 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles, nobj_per_file_e
             if data.shape[0] == 0:
                raise IndexError('Data file \'{}\' with zero lines found.{}'.format(input_result_path, msg_rerun))
 
-            if nobj_per_file is not None:
-                if data.shape[0] != nobj_per_file:
-                    raise IndexError('Data file \'{}\' has {} lines, expected are {}.{}'.format(input_result_path, data.shape[0], nobj_per_file, msg_rerun))
+            if nobj_per_file_exp is not None:
+                if data.shape[0] != nobj_per_file_exp:
+                    raise IndexError('Data file \'{}\' has {} lines, expected are {}.{}'.format(input_result_path, data.shape[0], nobj_per_file_exp, msg_rerun))
 
             #print('File {}, data dim {}'.format(input_result_path, data.shape))
             final_gal_id = np.append(final_gal_id, data[:,0])
