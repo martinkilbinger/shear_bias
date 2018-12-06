@@ -101,7 +101,7 @@ def shapes_one_image(input_gal_path, input_psf_path, output_path, nxy_tiles, job
 
 
 
-def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
+def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles, nobj_per_file_exp=None):
     """Read and return KSB results from files.
     
     Parameters
@@ -114,6 +114,8 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
         directory where PSE output of the PSF is saved.
     nfiles: int
         number of files
+    nobj_per_file_exp: int, optional, default=None
+        if not None, raise exception if number of objects found in any file != nobj_per_file_exp
     
     Returns
     -------
@@ -122,6 +124,8 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
     """
 
     print('*** Start all_read_shapelens ***')
+
+    msg_rerun = '\nYou may want to delete this file and re-run the shape measurment.'
 
     results = {}
 
@@ -144,9 +148,18 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles):
             input_psf_path = '{}/psf/starfield_image-{:03d}-0.fits'.format(input_result_path, i)
 
             # Galaxy parameters
-            data = np.loadtxt(input_result_path, usecols = (0,3,4,5,6))
+            try:
+                data = np.loadtxt(input_result_path, usecols = (0,3,4,5,6))
+            except IndexError as e:
+                print('Error while reading file \'{}\': {}.{}'.format(input_result_path, e, msg_rerun))
+                raise e
+
             if data.shape[0] == 0:
-               raise IndexError('Data file \'{}\' with zero lines found.\nYou may want to delete this file and re-run the shape measurment.'.format(input_result_path))
+               raise IndexError('Data file \'{}\' with zero lines found.{}'.format(input_result_path, msg_rerun))
+
+            if nobj_per_file is not None:
+                if data.shape[0] != nobj_per_file:
+                    raise IndexError('Data file \'{}\' has {} lines, expected are {}.{}'.format(input_result_path, data.shape[0], nobj_per_file, msg_rerun))
 
             #print('File {}, data dim {}'.format(input_result_path, data.shape))
             final_gal_id = np.append(final_gal_id, data[:,0])

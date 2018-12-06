@@ -15,6 +15,8 @@
 #include <shapelens/LensHelper.h>
 #include <tclap/CmdLine.h>
 
+#include <fstream>
+
 using namespace shapelens;
 
 data_t scale_list[] = {10, 8, 7, 6, 5, 4, 3.5, 3, 2.5, 2.5, 2.0};
@@ -36,16 +38,12 @@ int main(int argc, char* argv[]) {
   TCLAP::ValueArg<int> patchsize("s","size_stamp","Length for the square postage stamp", false, 96,"int" ,cmd);//FCS ADDED
   TCLAP::ValueArg<int> gridsize("g","grid_size","Number of stamps in each of the 2 dimension", false, 100,"int" ,cmd);//FCS ADDED
   TCLAP::ValueArg<std::string> psffile("p","psf_file", "PSF FITS file", true, "", "string", cmd);
-  TCLAP::ValueArg<std::string> outfile("o","output_file", "OUTPUT FILE", true, "", "string", cmd);
+  TCLAP::ValueArg<std::string> outfile("o", "output_file", "OUTPUT FILE", false, "", "string", cmd);
   TCLAP::UnlabeledValueArg<std::string> filename("filename","Object FITS file",true,"","string", cmd);
   cmd.parse(argc,argv);
   L=patchsize.getValue();//FCS ADDED
   N=gridsize.getValue();//FCS ADDED
   bool verbose=verbmode.getValue();
-  std::ostream *out = &(std::cout);
-
-  std::cout << "Output file = " << outfile.getValue() << std::endl;
-  return 0;
 
   if(verbose) std::cout<<"PATCH SIZE="<<L<<std::endl;
   if(verbose) std::cout<<"PATCH NB="<<N<<std::endl;
@@ -70,6 +68,17 @@ int main(int argc, char* argv[]) {
   if(verbose) std::cout<<"GET STAR IMAGE "<<psffile.getValue()<<std::endl;
   Image<float> star_im(psffile.getValue());
 
+
+  std::streambuf *coutbuf;
+  if (outfile.getValue().compare("") == 0) {
+  } else {
+     std::fstream out;
+     out.open(outfile.getValue(), std::ios_base::out);
+     coutbuf = std::cout.rdbuf(); //save old buf
+     std::cout.rdbuf(out.rdbuf()); //redirect std::cout to file
+  }
+
+
   // iterate through all objects in both images
   int id = 1;
   Point<int> P1,P2;
@@ -90,8 +99,8 @@ int main(int argc, char* argv[]) {
       obj.centroid(1) = P2(1) - L/2;
       psf.centroid = obj.centroid;
 
-      //std::cout << id << "\t" << obj.centroid(0) << "\t" << obj.centroid(1);
-      *out << id << "\t" << obj.centroid(0) << "\t" << obj.centroid(1);
+      std::cout << id << "\t" << obj.centroid(0) << "\t" << obj.centroid(1);
+      //*out << id << "\t" << obj.centroid(0) << "\t" << obj.centroid(1);
       
 
       // DEIMOS estimators, can use the same PSF measurements
@@ -169,9 +178,16 @@ int main(int argc, char* argv[]) {
       }
 
       std::cout << std::endl;
+      std::cout.flush();
+      std::cout << std::flush;
       id++;
     }
   }
+
+  if (outfile.getValue().compare("") != 0) {
+     std::cout.rdbuf(coutbuf); //reset to standard output again
+  }
+
   return 0;
 }
 
