@@ -64,14 +64,6 @@ set(CMAKE_C_FLAGS "-ansi -fPIC")
 add_executable(get_shapes ${SOURCES})
 target_link_libraries(get_shapes ${PKGS_LIBRARIES} ${SHAPELENS_LIB} ${TMV_LIB})
 
-#add_custom_command(get_shapes executable 
-    #POST_BUILD COMMAND 
-    #${CMAKE_INSTALL_NAME_TOOL} -change "lib/libshapelens.dylib ${SHAPELENS}/libshapelens.dylib")
-
-#   ${CMAKE_INSTALL_NAME_TOOL} -change "lib/libshapelens.dylib ${SHAPELENS}/libshapelens.dylib")
-
-#    $<TARGET_FILE:executable>)
-
 #INSTALL(TARGETS get_shapes)
 
 
