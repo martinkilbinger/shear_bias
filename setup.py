@@ -45,6 +45,10 @@ class CMakeBuild(build_ext):
         for ext in self.extensions:
             self.build_extension(ext)
 
+        # MKDEBUG added
+        subprocess.call(["make", "install"])
+
+
     def build_extension(self, ext):
         extdir = os.path.abspath(
             os.path.dirname(self.get_ext_fullpath(ext.name)))
@@ -64,6 +68,9 @@ class CMakeBuild(build_ext):
         else:
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
             build_args += ['--', '-j2']
+
+            if os.environ['CMAKE_INSTALL_PREFIX']:
+                cmake_args += ['-DCMAKE_INSTALL_PREFIX={}'.format(os.environ['CMAKE_INSTALL_PREFIX'])]
 
         env = os.environ.copy()
         env['CXXFLAGS'] = '{} -DVERSION_INFO=\\"{}\\"'.format(

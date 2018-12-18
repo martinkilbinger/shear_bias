@@ -64,6 +64,5 @@ set(CMAKE_C_FLAGS "-ansi -fPIC")
 add_executable(get_shapes ${SOURCES})
 target_link_libraries(get_shapes ${PKGS_LIBRARIES} ${SHAPELENS_LIB} ${TMV_LIB})
 
-#INSTALL(TARGETS get_shapes)
-
+INSTALL(TARGETS get_shapes DESTINATION bin)
 

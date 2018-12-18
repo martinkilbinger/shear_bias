@@ -9,7 +9,7 @@ Set the package information
 :Date: 27/11/2018
 """
 
-__version__ = '0.2'
+__version__ = '0.3'
 __whoami__  = 'shear_bias'
 __author__  = 'Martin Kilbinger, Arnau Pujol'
 __email__   = 'martin.kilbinger@cea.fr'

@@ -194,7 +194,7 @@ def all_read_shapelens(g_dict, input_base_dir, psf_path, nfiles, nobj_per_file_e
                 out_sn, out_beta, out_q, final_ep, final_ex)
 
     print('Read {} files with measured galaxy properties including shapes.'.format(count_gal))
-    print('Read {} files with PSF shapes.'.format(count_PSF))
+    print('[Optional:] Read {} files with PSF shapes.'.format(count_PSF))
 
     print('*** End all_read_shapelens ***')
 

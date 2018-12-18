@@ -17,6 +17,7 @@ using galsim
 
 import os
 import sys
+import urllib
 
 import misc
 
@@ -27,12 +28,15 @@ import misc
 def count_missing_files(path_format, n):
     """Return the number of missing files i=0..n-1 following file format
 
+    Parameters
+    ----------
     path_format: string including format
         file format
     n: int
         number of files
 
     Returns
+    -------
     n_missing: int
         number of missing files
     """
@@ -44,6 +48,53 @@ def count_missing_files(path_format, n):
             n_missing = n_missing + 1
 
     return n_missing
+
+
+
+def download_great3_data(input_dir, remote_dir, branch, nfiles, mode=None):
+    """Download GREAT3 meta-data.
+
+    Parameters
+    ----------
+    input_dir: string
+        input directory
+    remote_dir: string
+        URL source directory
+    branch: string
+        GREAT3 branch (full name, e.g. 'control/space/constant')
+    nfiles: int
+        number of files
+    mode: string, optional, default=None
+        transmission mode, to be appended to remote file name
+
+    Returns
+    -------
+    n_download: int
+        number of downloaded files
+    """
+
+    # Input file formats, given in the galsim config files
+    file_format = ['epoch_catalog-%03d-%1d.fits', 'epoch_parameters-%03d-%1d.yaml', 'star_catalog-%03d-%1d.fits']
+
+    n_download = 0
+    for f in file_format:
+        for i in range(nfiles):
+            fname = f % (i, 0)
+            fpath = '{}/{}'.format(input_dir, fname)
+            if os.path.exists(fpath):
+                print('File {} exists, skipping...'.format(fpath))
+            else:
+                url = '{}/{}{}'.format(remote_dir, fname, mode)
+                print('Downloading {} to {}...'.format(url, fpath))
+                urllib.urlretrieve(url, fpath)
+                n_download = n_download + 1
+
+    print('{} files downloaded'.format(n_download))
+    print('*** End download_great3_data ***')
+    
+
+    return n_download
+    
 
 
 def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, output_base_dir, \
