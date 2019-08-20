@@ -1,5 +1,7 @@
 # Shear bias
 
+[![arXiv](https://img.shields.io/badge/arXiv-1806.10537-red.svg)](https://arxiv.org/abs/1806.10537)
+
 `shear_bias` is a package that contains tools and scripts for shear bias
 estimation for weak gravitational lensing analysis.
 
@@ -60,5 +62,5 @@ The following packages should be installed:
 ## Reference
 
 Pujol, Kilbinger, Sureau & Bobin (2018),
-https://arxiv.org/abs/1806.10537,
-http://cdsads.u-strasbg.fr/abs/2018arXiv180610537P
+[arXiv:1806.10537](https://arxiv.org/abs/1806.10537),
+[ads](http://cdsads.u-strasbg.fr/abs/2018arXiv180610537P)
