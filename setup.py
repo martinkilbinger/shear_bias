@@ -69,7 +69,7 @@ class CMakeBuild(build_ext):
             cmake_args += ['-DCMAKE_BUILD_TYPE=' + cfg]
             build_args += ['--', '-j2']
 
-            if os.environ['CMAKE_INSTALL_PREFIX']:
+            if 'CMAKE_INSTALL_PREFIX' in os.environ: #os.environ['CMAKE_INSTALL_PREFIX']:
                 cmake_args += ['-DCMAKE_INSTALL_PREFIX={}'.format(os.environ['CMAKE_INSTALL_PREFIX'])]
 
         env = os.environ.copy()
