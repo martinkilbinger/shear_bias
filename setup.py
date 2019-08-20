@@ -43,10 +43,11 @@ class CMakeBuild(build_ext):
                 raise RuntimeError("CMake >= 3.1.0 is required on Windows")
 
         for ext in self.extensions:
-            self.build_extension(ext)
+            #self.build_extension(ext)
+            pass
 
         # MKDEBUG added
-        subprocess.call(["make", "install"])
+        #subprocess.call(["make", "install"])
 
 
     def build_extension(self, ext):
