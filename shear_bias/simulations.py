@@ -19,7 +19,7 @@ import os
 import sys
 import urllib
 
-import misc
+import shear_bias.misc as misc
 
 
 #### great3-like simulations with galsim ###
