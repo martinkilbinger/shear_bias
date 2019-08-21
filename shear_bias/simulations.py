@@ -17,6 +17,7 @@ using galsim
 
 import os
 import sys
+import shutil
 import urllib
 
 import shear_bias.misc as misc
@@ -57,7 +58,7 @@ def download_great3_data(input_dir, remote_dir, branch, nfiles, mode=None):
     Parameters
     ----------
     input_dir: string
-        input directory
+        input directory, to store great3 input fits and yaml files
     remote_dir: string
         URL source directory
     branch: string
@@ -76,6 +77,10 @@ def download_great3_data(input_dir, remote_dir, branch, nfiles, mode=None):
     # Input file formats, given in the galsim config files
     file_format = ['epoch_catalog-%03d-%1d.fits', 'epoch_parameters-%03d-%1d.yaml', 'star_catalog-%03d-%1d.fits']
 
+    if not os.path.exists(input_dir):
+        print('Creating galsim/great3 input dir \'{}\''.format(input_dir))
+        os.makedirs(input_dir)
+
     n_download = 0
     for f in file_format:
         for i in range(nfiles):
@@ -86,15 +91,13 @@ def download_great3_data(input_dir, remote_dir, branch, nfiles, mode=None):
             else:
                 url = '{}/{}{}'.format(remote_dir, fname, mode)
                 print('Downloading {} to {}...'.format(url, fpath))
-                urllib.urlretrieve(url, fpath)
+                urllib.request.urlretrieve(url, filename=fpath)
                 n_download = n_download + 1
 
     print('{} files downloaded'.format(n_download))
     print('*** End download_great3_data ***')
     
-
     return n_download
-    
 
 
 def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, output_base_dir, \
@@ -129,7 +132,12 @@ def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, outp
     None
     """
 
+
     print('*** Start create_all_sims_great3 ***')
+
+    executable = 'galsim'
+    if not shutil.which(executable):
+        raise OSError('executable program \'{}\' not found'.format(executable))
 
     for fname in [config_path, config_psf_path]:
         if not os.path.exists(fname):
