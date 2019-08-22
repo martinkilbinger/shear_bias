@@ -28,15 +28,21 @@
 
 \section{Abstract}
 
+Observed ellipticity of one individual galaxy with properties $\vec{P}$ (Eq.10 in Pujol+2018)
+$$
+\vec{e}^{obs} = R(\vec{P})\vec{g} +\vec{a}(\vec{P}) + f(\vec{e}^I)
+$$
+
+Response (Eq.2 in Pujol+2018)
 $$
 R_{\alpha\beta} = \dfrac{\partial e_\alpha^{obs}}{\partial g_\beta} \approx \dfrac{e_\alpha^{obs,+}-e_\alpha^{obs,-}}{2\Delta g_\beta}
 $$
 
 
-Taylor expansion of the exact expression from theory
+Taylor expansion of the exact expression from theory (for $|g|\leq1$)
 $$
 e = \dfrac{e^I+g}{1+g^*e^I} = e^I+g-g^*(e^I)^2 +O(g^2)
-,\quad \text{if } |g^*e^I|<1
+,\quad \text{if } |g^*e^I|<1 \text{ as } \dfrac{1}{1+x}=\sum_{k=0}^{\infty}(-1)^kx^k \text{ for } |x|<1 
 $$
 
 $$
@@ -55,14 +61,7 @@ $$
 $$
 
 
-
-
-observed ellipticity of one galaxy with properties $\vec{P}$ (Eq.10 in Pujol+2018)
-$$
-\vec{e}^{obs} = R(\vec{P})\vec{g} +\vec{a}(\vec{P}) + f(\vec{e}^I)
-$$
-
-idem with the next order term
+Observed ellipticity of one individual galaxy with the next order term
 $$
 \vec{e}^{obs} = R(\vec{P})A(\vec{e}^I)\vec{g} +\vec{a}(\vec{P}) + f(\vec{e}^I)
 $$
@@ -74,17 +73,19 @@ $$
 
 \section{Proof of the mean property}
 
+This is the proof of that the mean of the ellipticity estimator $e^{obs}$ is zero. The mean is taken over intrinsic ellipticities $e^I$ with probability density $p(e^I)$.
+
 Proof with exact expression
 
 $$
 \begin{array}{rcll}
 \langle e^{obs}\rangle
-&=& {\displaystyle \int_{D(\vec{0},1)} e^{obs}(e^I,g) p(e^I) de^I} & \\
+&=& {\displaystyle \int_{D(\vec{0},1)} e^{obs}(e^I,g) p(e^I) de^I} & \text{$D(\vec{0},1)$ is the disk of center $\vec{0}$ and radius $1$ (hereafter $C(0,1)$ the circle)} \\
 &=& {\displaystyle \int_0^1 \left( \int_0^{2\pi} e^{obs}(ye^{2i\phi},g) d\phi \right) p(y)ydy } 
 & \text{$e^I=ye^{2i\phi}$, $p(e^I)$ must be polar symmetric} \\
 &=& {\displaystyle \int_0^1 \left( \int_0^{2\pi} \dfrac{ye^{2i\phi}+g}{1+g^*ye^{2i\phi}} d\phi \right) p(y)ydy } & \\
-&=& {\displaystyle \int_0^1 \left( -i \oint \dfrac{yu+g}{u(1+g^*yu)} du \right) p(y)ydy } & \text{$u=e^{2i\phi}$, $\dfrac{du}{d\phi}=2iu$, $\dfrac{d\phi}{du}=\dfrac{-i}{2u}$ but as $\phi\in[0,2\pi)$, there are two circles } \\
-&=& 2\pi g {\displaystyle \int_0^1 p(y)ydy } & \text{by residue theorem} \\
+&=& {\displaystyle \int_0^1 \left( -i \oint_{C(0,1)} \dfrac{yu+g}{u(1+g^*yu)} du \right) p(y)ydy } & \text{$u=e^{2i\phi}$, $\dfrac{du}{d\phi}=2iu$, $\dfrac{d\phi}{du}=\dfrac{-i}{2u}$ but as $\phi\in[0,2\pi)$, there are two circles } \\
+&=& 2\pi g {\displaystyle \int_0^1 p(y)ydy } & \text{by residue theorem, with poles $u=0$ (inside) and $u=-1/(g^*y)$ (outside)} \\
 &=& g & \text{imposed by normalization of $p$} \\
 \end{array}
 $$
@@ -94,9 +95,9 @@ Proof with Taylor expansion
 $$
 \begin{array}{rcll}
 \langle e^{obs}\rangle
-&=& {\displaystyle \int_0^1 \left( -i \oint \dfrac{yu+g}{u(1+g^*yu)} du \right) p(y)ydy } & \\
-&=& {\displaystyle \int_0^1 \left( -i \oint y+\dfrac{g}{u}-g^*y^2u+\sum_{k=2}^\infty f_k u^k du \right) p(y)ydy } & \text{with $f_k$ some factors} \\
-&=& 2\pi g {\displaystyle \int_0^1 p(y)ydy } & \text{as } {\displaystyle \oint z^m dz =\left\{\begin{array}{ll} 2\pi i & m=-1 \\ 0 & \text{otherwise} \end{array}\right.} \\
+&=& {\displaystyle \int_0^1 \left( -i \oint_{C(0,1)} \dfrac{yu+g}{u(1+g^*yu)} du \right) p(y)ydy } & \\
+&=& {\displaystyle \int_0^1 \left( -i \oint_{C(0,1)} y+\dfrac{g}{u}-g^*y^2u+\sum_{k=2}^\infty f_k u^k du \right) p(y)ydy } & \text{with $f_k$ some factors} \\
+&=& 2\pi g {\displaystyle \int_0^1 p(y)ydy } & \text{as } {\displaystyle \oint_{C(0,1)} z^m dz =\left\{\begin{array}{ll} 2\pi i & m=-1 \\ 0 & \text{otherwise} \end{array}\right.} \\
 &=& g & \\
 \end{array}
 $$
