@@ -1,0 +1,105 @@
+\documentclass[a4paper]{article}
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage[T1]{fontenc}
+%% Sets page size and margins
+\usepackage[a4paper,top=1cm,bottom=1cm,left=1cm,right=1cm,marginparwidth=1cm]{geometry}
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+%\usepackage{apacite}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\usepackage{physics}
+
+
+
+\title{\vspace{-2cm} Table ronde weak lensing calibration}
+\author{Olivier Kauffmann}
+
+\begin{document}
+\maketitle
+
+
+
+\section{Abstract}
+
+$$
+R_{\alpha\beta} = \dfrac{\partial e_\alpha^{obs}}{\partial g_\beta} \approx \dfrac{e_\alpha^{obs,+}-e_\alpha^{obs,-}}{2\Delta g_\beta}
+$$
+
+
+Taylor expansion of the exact expression from theory
+$$
+e = \dfrac{e^I+g}{1+g^*e^I} = e^I+g-g^*(e^I)^2 +O(g^2)
+,\quad \text{if } |g^*e^I|<1
+$$
+
+$$
+\vec{e} = \vec{e}^I+\vec{g}(1+|\vec{e}^I|^2)-2(\vec{e}^I\cdot \vec{g})\vec{e}^I +O(g^2)
+$$
+
+$$
+\vec{e} = \vec{e}^I +
+\left(
+\begin{array}{cc}
+   1-(e_1^I)^2+(e_2^I)^2 & -2e_1^I e_2^I \\
+   -2e_1^I e_2^I & 1+(e_1^I)^2-(e_2^I)^2 
+\end{array}
+\right)
+\vec{g}= \vec{e}^I + A(\vec{e}^I)\vec{g}
+$$
+
+
+
+
+observed ellipticity of one galaxy with properties $\vec{P}$ (Eq.10 in Pujol+2018)
+$$
+\vec{e}^{obs} = R(\vec{P})\vec{g} +\vec{a}(\vec{P}) + f(\vec{e}^I)
+$$
+
+idem with the next order term
+$$
+\vec{e}^{obs} = R(\vec{P})A(\vec{e}^I)\vec{g} +\vec{a}(\vec{P}) + f(\vec{e}^I)
+$$
+
+$$
+\dfrac{\partial e_\alpha^{obs}}{\partial g_\beta} = \left[R(\vec{P})A(\vec{e}^I)\right]_{\alpha\beta} = \widetilde{R}(\vec{P},\vec{e}^I)_{\alpha\beta}
+$$
+
+
+\section{Proof of the mean property}
+
+Proof with exact expression
+
+$$
+\begin{array}{rcll}
+\langle e^{obs}\rangle
+&=& {\displaystyle \int_{D(\vec{0},1)} e^{obs}(e^I,g) p(e^I) de^I} & \\
+&=& {\displaystyle \int_0^1 \left( \int_0^{2\pi} e^{obs}(ye^{2i\phi},g) d\phi \right) p(y)ydy } 
+& \text{$e^I=ye^{2i\phi}$, $p(e^I)$ must be polar symmetric} \\
+&=& {\displaystyle \int_0^1 \left( \int_0^{2\pi} \dfrac{ye^{2i\phi}+g}{1+g^*ye^{2i\phi}} d\phi \right) p(y)ydy } & \\
+&=& {\displaystyle \int_0^1 \left( -i \oint \dfrac{yu+g}{u(1+g^*yu)} du \right) p(y)ydy } & \text{$u=e^{2i\phi}$, $\dfrac{du}{d\phi}=2iu$, $\dfrac{d\phi}{du}=\dfrac{-i}{2u}$ but as $\phi\in[0,2\pi)$, there are two circles } \\
+&=& 2\pi g {\displaystyle \int_0^1 p(y)ydy } & \text{by residue theorem} \\
+&=& g & \text{imposed by normalization of $p$} \\
+\end{array}
+$$
+
+Proof with Taylor expansion
+
+$$
+\begin{array}{rcll}
+\langle e^{obs}\rangle
+&=& {\displaystyle \int_0^1 \left( -i \oint \dfrac{yu+g}{u(1+g^*yu)} du \right) p(y)ydy } & \\
+&=& {\displaystyle \int_0^1 \left( -i \oint y+\dfrac{g}{u}-g^*y^2u+\sum_{k=2}^\infty f_k u^k du \right) p(y)ydy } & \text{with $f_k$ some factors} \\
+&=& 2\pi g {\displaystyle \int_0^1 p(y)ydy } & \text{as } {\displaystyle \oint z^m dz =\left\{\begin{array}{ll} 2\pi i & m=-1 \\ 0 & \text{otherwise} \end{array}\right.} \\
+&=& g & \\
+\end{array}
+$$
+
+
+\end{document}
