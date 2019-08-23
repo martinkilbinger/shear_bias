@@ -99,7 +99,7 @@ def jackknife_err(var, jk_var):
     if type(var) == np.ndarray:
         jk_dim = jk_var.shape[0]
         err    = (jk_dim - 1.0) / jk_dim * (jk_var - var)**2
-	jk_err = np.sqrt(np.sum(err, axis = 0))
+        jk_err = np.sqrt(np.sum(err, axis = 0))
     else:
         jk_dim = len(jk_var)
         err = (jk_dim - 1.0) / jk_dim * (jk_var - var)**2
