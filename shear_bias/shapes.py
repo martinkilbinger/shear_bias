@@ -18,7 +18,7 @@ of galaxy images using shapelens.
 import os
 import numpy as np
 
-from misc import *
+from shear_bias.misc import *
 
 
 def get_slope(x, y):

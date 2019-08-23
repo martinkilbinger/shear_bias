@@ -105,3 +105,4 @@ venv.bak/
 
 # Output, created by running notebook
 output/
+input/

@@ -19,7 +19,7 @@ matplotlib.use('Agg')
 
 import matplotlib.pyplot as plt
 
-from errors import *
+from shear_bias.errors import *
 
 
 def get_item(x, i):

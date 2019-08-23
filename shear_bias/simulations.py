@@ -19,7 +19,7 @@ import os
 import sys
 import urllib
 
-import misc
+import shear_bias.misc as misc
 
 
 #### great3-like simulations with galsim ###
@@ -57,7 +57,7 @@ def download_great3_data(input_dir, remote_dir, branch, nfiles, mode=None):
     Parameters
     ----------
     input_dir: string
-        input directory
+        input directory, to store great3 input fits and yaml files
     remote_dir: string
         URL source directory
     branch: string
@@ -76,6 +76,10 @@ def download_great3_data(input_dir, remote_dir, branch, nfiles, mode=None):
     # Input file formats, given in the galsim config files
     file_format = ['epoch_catalog-%03d-%1d.fits', 'epoch_parameters-%03d-%1d.yaml', 'star_catalog-%03d-%1d.fits']
 
+    if not os.path.exists(input_dir):
+        print('Creating galsim/great3 input dir \'{}\''.format(input_dir))
+        os.makedirs(input_dir)
+
     n_download = 0
     for f in file_format:
         for i in range(nfiles):
@@ -86,15 +90,16 @@ def download_great3_data(input_dir, remote_dir, branch, nfiles, mode=None):
             else:
                 url = '{}/{}{}'.format(remote_dir, fname, mode)
                 print('Downloading {} to {}...'.format(url, fpath))
-                urllib.urlretrieve(url, fpath)
+		if sys.version_info.major == 2:
+                	urllib.urlretrieve(url, filename=fpath)
+		else:
+                	urllib.request.urlretrieve(url, filename=fpath)
                 n_download = n_download + 1
 
     print('{} files downloaded'.format(n_download))
     print('*** End download_great3_data ***')
     
-
     return n_download
-    
 
 
 def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, output_base_dir, \
@@ -129,6 +134,7 @@ def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, outp
     None
     """
 
+
     print('*** Start create_all_sims_great3 ***')
 
     for fname in [config_path, config_psf_path]:
@@ -146,7 +152,7 @@ def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, outp
         
         n_out_missing = count_missing_files('{}/{}'.format(output_dir, output_gal_fname_format), nfiles)
         if n_out_missing > 0:
-            print('For shear ({},{}), {} images need to be created, running galsim'.format(g[0], g[1], n_out_missing))
+            print('For shear ({},{}), {} images need to be created, running \'galsim\''.format(g[0], g[1], n_out_missing))
             create_sim_one_shear_great3(g, config_path, input_dir, output_dir, \
                                         extra_str, output_gal_fname_format, nxy_tiles=nxy_tiles, job=job)
         else:
@@ -157,7 +163,7 @@ def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, outp
     outdir_psf = '{}/psf'.format(output_base_dir)
     n_out_missing = count_missing_files('{}/{}'.format(outdir_psf, output_psf_fname_format), nfiles)
     if n_out_missing > 0:
-        print('{} PSF images need to be created, running galsim'.format(n_out_missing))
+        print('{} PSF images need to be created, running \'galsim\''.format(n_out_missing))
         galsim_command = 'galsim {0} input.catalog.dir={1} input.dict.dir={1} output.dir={2} output.file_name.format={3}{4}'. \
             format(config_psf_path, input_dir, outdir_psf, output_psf_fname_format, extra_str)
         misc.run_command(galsim_command, job=job)
