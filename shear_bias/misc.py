@@ -145,8 +145,8 @@ def check_avail(prog):
 
     Parameters
     ----------
-    prog: string
-       library or command name
+    prog: hash array
+       library or command name and type
 
     Returns
     ------- 
@@ -154,23 +154,16 @@ def check_avail(prog):
        True if available
     """
 
-    m = re.search('(.*)_(.*)', prog)
-    try:
-       name = m.group(1)
-       typ = m.group(2)
-    except:
-       raise 'Could not match program name and type'
-
-    if typ == 'cmd':
+    if prog['type'] == 'cmd':
 
         import distutils.spawn
-        if not distutils.spawn.find_executable(name):
-            raise OSError('executable program \'{}\' not found'.format(name))
+        if not distutils.spawn.find_executable(prog['name']):
+            raise OSError('executable program \'{}\' not found'.format(prog['name']))
 
-    elif typ == 'py':
+    elif prog['type'] == 'py':
 
         try:
-            __import__(name) 
+            __import__(prog['name']) 
         except ModuleNotFoundError as e:
             raise 'Library not found'
 
