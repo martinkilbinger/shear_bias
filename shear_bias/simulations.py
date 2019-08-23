@@ -17,7 +17,6 @@ using galsim
 
 import os
 import sys
-import distutils.spawn
 import urllib
 
 import shear_bias.misc as misc
@@ -137,10 +136,6 @@ def create_all_sims_great3(g_list, config_path, config_psf_path, input_dir, outp
 
 
     print('*** Start create_all_sims_great3 ***')
-
-    executable = 'galsim'
-    if not distutils.spawn.find_executable(executable):
-        raise OSError('executable program \'{}\' not found'.format(executable))
 
     for fname in [config_path, config_psf_path]:
         if not os.path.exists(fname):

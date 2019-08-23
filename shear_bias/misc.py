@@ -13,9 +13,9 @@ This module contains misc methods.
 """
 
 import os
+import re
 import subprocess
 import shlex
-
 
 
 class param:
@@ -30,6 +30,10 @@ class param:
 
     def get_vars(self, **kwds):
         return vars(self)
+
+    def get_vals(self, **kwds):
+	v = self.get_vars()
+        return [val[1] for val in v.items()]
 
 
 class gal_par(object):
@@ -65,7 +69,6 @@ class gal_par(object):
     def len(self):
 
         return len(self.idn)
-
 
 
 def run_command(cmd, job=None, output_path=None, shell='subprocess'):
@@ -136,3 +139,42 @@ def get_dir_name_shear(g):
 
     return dir_name
 
+
+def check_avail(prog):
+    """Check availability of library or executable.
+
+    Parameters
+    ----------
+    prog: string
+       library or command name
+
+    Returns
+    ------- 
+    res: bool
+       True if available
+    """
+
+    m = re.search('(.*)_(.*)', prog)
+    try:
+       name = m.group(1)
+       typ = m.group(2)
+    except:
+       raise 'Could not match program name and type'
+
+    if typ == 'cmd':
+
+        import distutils.spawn
+        if not distutils.spawn.find_executable(name):
+            raise OSError('executable program \'{}\' not found'.format(name))
+
+    elif typ == 'py':
+
+        try:
+            __import__(name) 
+        except ModuleNotFoundError as e:
+            raise 'Library not found'
+
+    else:
+        raise 'Unknown type'
+    
+    return 0
