@@ -6,7 +6,7 @@
 \usepackage{tabu}
 \usepackage[T1]{fontenc}
 %% Sets page size and margins
-\usepackage[a4paper,top=1cm,bottom=1cm,left=1cm,right=1cm,marginparwidth=1cm]{geometry}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=1cm,right=1cm,marginparwidth=1cm]{geometry}
 %% Useful packages
 \usepackage{amsmath}
 \usepackage{graphicx}
@@ -71,17 +71,73 @@ $$
 $$
 
 
+\section{Update 2019}
+\subsection{Predictions}
+
+Taylor expansion around $g=0$
+$$
+e_\alpha^\text{true} = e_\alpha^I + A_{\alpha\beta}g_\beta + B_{\alpha\beta\gamma}g_\beta g_\gamma + O(g^3)
+$$
+The mean property $\langle e^\text{true}\rangle=g$ holds whatever the degree of the expansion (see proof below).
+
+$$
+\begin{array}{rcl}
+A_{11} &=&  1-(e_1^I)^2+(e_2^I)^2 \\
+A_{12}=A_{21} &=&  -2e_1^I e_2^I \\
+A_{22} &=&  1-(e_1^I)^2+(e_2^I)^2 \\
+\end{array}
+$$
+
+$$
+\begin{array}{rcl}
+B_{111} &=&   (e_1^I)^3 -3e_1^I(e_2^I)^2 -e_1^I \\
+B_{112}=B_{121} &=& 3(e_1^I)^2e_2^I -(e_2^I)^3 \\
+B_{122} &=&  -(e_1^I)^3 +3e_1^I(e_2^I)^2 -e_1^I \\
+B_{211} &=&  -(e_2^I)^3 +3(e_1^I)^2e_2^I -e_2^I \\
+B_{212}=B_{221} &=& 3e_1^I(e_2^I)^2 -(e_1^I)^3 \\
+B_{222} &=&   (e_2^I)^3 -3(e_1^I)^2e_2^I -e_2^I \\
+\end{array}
+$$
+
+\subsection{Observations}
+
+Observed ellipticity defined as the true ellipticity with a multiplicative response and an additive bias, both functions of the galaxy physical properties $\vec{P}$
+$$
+\begin{array}{lcl}
+e_\alpha^\text{obs} &=& R_{\alpha\beta}e_\beta^\text{true} + a_\alpha + S \\
+&=& R_{\alpha\beta}e_\beta^I + R_{\alpha\beta}A_{\beta\gamma}g_\gamma + R_{\alpha\beta}B_{\beta\gamma\delta}g_\gamma g_\delta + a_\alpha + S \\
+&=& \tilde{R}_{\alpha\beta}g_\beta + \dfrac{1}{2}\tilde{Q}_{\alpha\beta\gamma}g_\beta g_\gamma + a_\alpha + f(e_\alpha^I)
+\end{array}
+$$
+with $\tilde{R}_{\alpha\beta} = R_{\alpha i}A_{i \beta}$ (4 independent values) and $\tilde{Q}_{\alpha\beta\gamma} = 2R_{\alpha i}B_{i \beta\gamma}$ (6 independent values)
+
+First derivatives (4 equations):
+$$
+\dfrac{\partial e_\alpha^{obs}}{\partial g_\beta} = \tilde{R}_{\alpha\beta} + \dfrac{1}{2}\left( \tilde{Q}_{\alpha\beta\gamma}g_\gamma + \tilde{Q}_{\alpha\beta\gamma}g_\beta \right)
+$$
+
+Second derivatives (6 equations):
+$$
+\dfrac{\partial^2 e_\alpha^{obs}}{\partial g_\beta\partial g_\gamma} = \dfrac{1}{2}\left( \tilde{Q}_{\alpha\beta\gamma} + \tilde{Q}_{\alpha\gamma\beta} \right) = P_{\alpha\beta\gamma}
+$$
+
+Finite differences for second derivatives, with 5 points in the $(g_1,g_2)$ plane:
+$$
+P_{\alpha\beta\gamma} \approx \dfrac{e_\alpha^\text{obs}(+\Delta g_\beta)+e_\alpha^\text{obs}(-\Delta g_\beta)+e_\alpha^\text{obs}(+\Delta g_\gamma)+e_\alpha^\text{obs}(-\Delta g_\gamma) - 4e_\alpha^\text{obs}(0)}{4\Delta g_\beta\Delta g_\gamma}
+$$
+
+
 \section{Proof of the mean property}
 
-This is the proof of that the mean of the ellipticity estimator $e^{obs}$ is zero. The mean is taken over intrinsic ellipticities $e^I$ with probability density $p(e^I)$.
+This is the proof of that the mean of the ellipticity estimator $e^\text{true}$ is zero. The mean is taken over intrinsic ellipticities $e^I$ with probability density $p(e^I)$.
 
 Proof with exact expression
 
 $$
 \begin{array}{rcll}
-\langle e^{obs}\rangle
-&=& {\displaystyle \int_{D(\vec{0},1)} e^{obs}(e^I,g) p(e^I) de^I} & \text{$D(\vec{0},1)$ is the disk of center $\vec{0}$ and radius $1$ (hereafter $C(0,1)$ the circle)} \\
-&=& {\displaystyle \int_0^1 \left( \int_0^{2\pi} e^{obs}(ye^{2i\phi},g) d\phi \right) p(y)ydy } 
+\langle e^\text{true}\rangle
+&=& {\displaystyle \int_{D(\vec{0},1)} e^\text{true}(e^I,g) p(e^I) de^I} & \text{$D(\vec{0},1)$ is the disk of center $\vec{0}$ and radius $1$ (hereafter $C(0,1)$ the circle)} \\
+&=& {\displaystyle \int_0^1 \left( \int_0^{2\pi} e^\text{true}(ye^{2i\phi},g) d\phi \right) p(y)ydy } 
 & \text{$e^I=ye^{2i\phi}$, $p(e^I)$ must be polar symmetric} \\
 &=& {\displaystyle \int_0^1 \left( \int_0^{2\pi} \dfrac{ye^{2i\phi}+g}{1+g^*ye^{2i\phi}} d\phi \right) p(y)ydy } & \\
 &=& {\displaystyle \int_0^1 \left( -i \oint_{C(0,1)} \dfrac{yu+g}{u(1+g^*yu)} du \right) p(y)ydy } & \text{$u=e^{2i\phi}$, $\dfrac{du}{d\phi}=2iu$, $\dfrac{d\phi}{du}=\dfrac{-i}{2u}$ but as $\phi\in[0,2\pi)$, there are two circles } \\
@@ -94,7 +150,7 @@ Proof with Taylor expansion
 
 $$
 \begin{array}{rcll}
-\langle e^{obs}\rangle
+\langle e^\text{true}\rangle
 &=& {\displaystyle \int_0^1 \left( -i \oint_{C(0,1)} \dfrac{yu+g}{u(1+g^*yu)} du \right) p(y)ydy } & \\
 &=& {\displaystyle \int_0^1 \left( -i \oint_{C(0,1)} y+\dfrac{g}{u}-g^*y^2u+\sum_{k=2}^\infty f_k u^k du \right) p(y)ydy } & \text{with $f_k$ some factors} \\
 &=& 2\pi g {\displaystyle \int_0^1 p(y)ydy } & \text{as } {\displaystyle \oint_{C(0,1)} z^m dz =\left\{\begin{array}{ll} 2\pi i & m=-1 \\ 0 & \text{otherwise} \end{array}\right.} \\
