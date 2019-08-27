@@ -106,24 +106,29 @@ $$
 \begin{array}{lcl}
 e_\alpha^\text{obs} &=& R_{\alpha\beta}e_\beta^\text{true} + a_\alpha + S \\
 &=& R_{\alpha\beta}e_\beta^I + R_{\alpha\beta}A_{\beta\gamma}g_\gamma + R_{\alpha\beta}B_{\beta\gamma\delta}g_\gamma g_\delta + a_\alpha + S \\
-&=& \tilde{R}_{\alpha\beta}g_\beta + \dfrac{1}{2}\tilde{Q}_{\alpha\beta\gamma}g_\beta g_\gamma + a_\alpha + f(e_\alpha^I)
+&=& \tilde{R}_{\alpha\beta}g_\beta + \dfrac{1}{2}\tilde{Q}_{\alpha\beta\gamma}g_\beta g_\gamma + a_\alpha + f(e^I)
 \end{array}
 $$
 with $\tilde{R}_{\alpha\beta} = R_{\alpha i}A_{i \beta}$ (4 independent values) and $\tilde{Q}_{\alpha\beta\gamma} = 2R_{\alpha i}B_{i \beta\gamma}$ (6 independent values)
 
 First derivatives (4 equations):
 $$
-\dfrac{\partial e_\alpha^{obs}}{\partial g_\beta} = \tilde{R}_{\alpha\beta} + \dfrac{1}{2}\left( \tilde{Q}_{\alpha\beta\gamma}g_\gamma + \tilde{Q}_{\alpha\beta\gamma}g_\beta \right)
+\dfrac{\partial e_\alpha^\text{obs}}{\partial g_\beta} = \tilde{R}_{\alpha\beta} + \dfrac{1}{2}\left( \tilde{Q}_{\alpha\beta\gamma}g_\gamma + \tilde{Q}_{\alpha\beta\gamma}g_\beta \right)
 $$
 
 Second derivatives (6 equations):
 $$
-\dfrac{\partial^2 e_\alpha^{obs}}{\partial g_\beta\partial g_\gamma} = \dfrac{1}{2}\left( \tilde{Q}_{\alpha\beta\gamma} + \tilde{Q}_{\alpha\gamma\beta} \right) = P_{\alpha\beta\gamma}
+\dfrac{\partial^2 e_\alpha^\text{obs}}{\partial g_\beta\partial g_\gamma} = \dfrac{1}{2}\left( \tilde{Q}_{\alpha\beta\gamma} + \tilde{Q}_{\alpha\gamma\beta} \right)
+$$
+
+Finite differences for first derivatives, with 2 points in the $(g_1,g_2)$ plane:
+$$
+\dfrac{\partial e_\alpha^\text{obs}}{\partial g_\beta} \approx \dfrac{e_\alpha^\text{obs}(+\Delta g_\beta)-e_\alpha^\text{obs}(-\Delta g_\beta)}{2\Delta g_\beta}
 $$
 
 Finite differences for second derivatives, with 5 points in the $(g_1,g_2)$ plane:
 $$
-P_{\alpha\beta\gamma} \approx \dfrac{e_\alpha^\text{obs}(+\Delta g_\beta)+e_\alpha^\text{obs}(-\Delta g_\beta)+e_\alpha^\text{obs}(+\Delta g_\gamma)+e_\alpha^\text{obs}(-\Delta g_\gamma) - 4e_\alpha^\text{obs}(0)}{4\Delta g_\beta\Delta g_\gamma}
+\dfrac{\partial^2 e_\alpha^\text{obs}}{\partial g_\beta\partial g_\gamma} \approx \dfrac{e_\alpha^\text{obs}(+\Delta g_\beta)+e_\alpha^\text{obs}(-\Delta g_\beta)+e_\alpha^\text{obs}(+\Delta g_\gamma)+e_\alpha^\text{obs}(-\Delta g_\gamma) - 4e_\alpha^\text{obs}(0)}{4\Delta g_\beta\Delta g_\gamma}
 $$
 
 
