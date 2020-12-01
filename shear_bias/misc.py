@@ -32,7 +32,7 @@ class param:
         return vars(self)
 
     def get_vals(self, **kwds):
-	v = self.get_vars()
+        v = self.get_vars()
         return [val[1] for val in v.items()]
 
 

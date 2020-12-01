@@ -90,10 +90,10 @@ def download_great3_data(input_dir, remote_dir, branch, nfiles, mode=None):
             else:
                 url = '{}/{}{}'.format(remote_dir, fname, mode)
                 print('Downloading {} to {}...'.format(url, fpath))
-		if sys.version_info.major == 2:
-                	urllib.urlretrieve(url, filename=fpath)
-		else:
-                	urllib.request.urlretrieve(url, filename=fpath)
+                if sys.version_info.major == 2:
+                    urllib.urlretrieve(url, filename=fpath)
+                else:
+                    urllib.request.urlretrieve(url, filename=fpath)
                 n_download = n_download + 1
 
     print('{} files downloaded'.format(n_download))
