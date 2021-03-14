@@ -102,7 +102,7 @@ setup(name             = __whoami__,
                           'Programming Language :: Python',
                           'Natural Language :: English',
                          ],
-      ext_modules      = [CMakeExtension('{}/get_shapes'.format(__whoami__))],
+      #ext_modules      = [CMakeExtension('{}/get_shapes'.format(__whoami__))],
       cmdclass         = dict(build_ext=CMakeBuild),
 )
 

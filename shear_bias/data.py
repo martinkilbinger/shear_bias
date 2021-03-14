@@ -1,3 +1,7 @@
+import os
+import urllib.request
+from shutil import move
+
 def download_HST_images(dest_dir='data/HST'):
     """Download HST images from galsim repository
     
@@ -5,16 +9,9 @@ def download_HST_images(dest_dir='data/HST'):
     ----------
     dest_dir: string, optional, default='data/HST'
         destination directory
-        
-    Returns
-    -------
-    None
     """
 
-    from urllib import urlretrieve
-    from shutil import move
-    
-    url = 'https://github.com/GalSim-developers/GalSim/tree/releases/2.0/examples/data'
+    url = 'https://github.com/GalSim-developers/GalSim/raw/releases/2.0/examples/data'
     data_files = ['real_galaxy_catalog_23.5_example.fits', \
                   'acs_I_unrot_sci_20_cf.fits', \
                   'real_galaxy_images.fits', \
@@ -30,6 +27,5 @@ def download_HST_images(dest_dir='data/HST'):
             print('Data file {} already exists, skipping...'.format(target))
         else:
             print('Downloading data file {}.'.format(target))
-            urlretrieve(url, d)
-            move(d, target)
-
+            urllib.request.urlretrieve('{}/{}'.format(url, d),
+                                       '{}/{}'.format(dest_dir, d))
