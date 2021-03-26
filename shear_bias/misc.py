@@ -16,6 +16,7 @@ import os
 import re
 import subprocess
 import shlex
+import numpy as np
 
 
 class param:
@@ -40,35 +41,34 @@ class gal_par(object):
     """Measured parameters of a galaxy sample.
     """
 
-    def __init__(self, idn, e1, e2, scale, sn, beta, q, ep, ex):
+    def __init__(self, e1, e2, scale, sn, beta, q, ep, ex):
 
-        self.idn   = idn
-        self.e1    = e1
-        self.e2    = e2
-        self.scale = scale
-        self.sn    = sn
-        self.beta  = beta
-        self.q     = q
-        self.ep    = ep
-        self.ex    = ex
+        self.e1    = np.array(e1)
+        self.e2    = np.array(e2)
+        self.scale = np.array(scale)
+        self.sn    = np.array(sn)
+        self.beta  = np.array(beta)
+        self.q     = np.array(q)
+        self.ep    = np.array(ep)
+        self.ex    = np.array(ex)
 
 
     @classmethod
     def from_gal_par(cls, other):
 
-        return cls(other.idn, other.e1, other.e2, other.scale, other.sn, other.beta, \
+        return cls(other.e1, other.e2, other.scale, other.sn, other.beta, \
                    other.q, other.ep, other.ex)
 
 
     @classmethod
-    def from_values(cls, idn, e1, e2, scale, sn, beta, q, ep, ex):
+    def from_values(cls,  e1, e2, scale, sn, beta, q, ep, ex):
 
-        return cls(idn, e1, e2, scale, sn, beta, q, ep, ex)
+        return cls(e1, e2, scale, sn, beta, q, ep, ex)
 
 
     def len(self):
 
-        return len(self.idn)
+        return len(self.e1)
 
 
 def run_command(cmd, job=None, output_path=None, shell='subprocess'):

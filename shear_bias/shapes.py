@@ -312,7 +312,8 @@ def shear_response(results, dg, output_dir=None):
 
     print('*** Start shear_response ***')
 
-    n = results.itervalues().next().len()
+    #n = results.itervalues().next().len()
+    n = results[(+1, 0)].len()
     R = np.zeros((2, 2, n))
 
     if len(results) == 4 or len(results) == 5:
