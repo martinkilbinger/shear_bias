@@ -2,11 +2,16 @@
 Shear bias
 ##########
 
-|arXiv|
+|arXiv| |pypiv| |pypid|
 
 .. |arXiv| image:: https://img.shields.io/badge/arXiv-1806.10537-red.svg
    :target: https://arxiv.org/abs/1806.10537
 
+.. |pypiv| image:: https://pypip.in/v/blackhole/badge.svg
+   :target: https://pypi.org/project/shear-bias/0.4
+
+.. |pypid| image:: https://pypip.in/d/blackhole/badge.svg
+   :target: https://pypi.org/project/shear-bias/0.4
 
 :Version: 0.4
 
