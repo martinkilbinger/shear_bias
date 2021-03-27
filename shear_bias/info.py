@@ -6,10 +6,10 @@ Set the package information
 
 :Authors: Martin Kilbinger, Arnau Pujol
 
-:Date: 27/11/2018
+:Date: 27/03/2021
 """
 
-__version__ = '0.3'
+__version__ = '0.4'
 __whoami__  = 'shear_bias'
 __author__  = 'Martin Kilbinger, Arnau Pujol'
 __email__   = 'martin.kilbinger@cea.fr'

@@ -11,9 +11,9 @@ estimation for weak gravitational lensing analysis.
   - Martin Kilbinger `martin.kilbinger@cea.fr`
   - Arnau Pujol `arnaupv@gmail.com`
 
-Version: 0.1
+Version: 0.4
 
-Date: November 2019
+Date: March 2021
 
 Documentation: TBD
 
@@ -23,7 +23,7 @@ Download the code from the `github` repository.
 
 ```bash
 
-git clone https://github.com/martinkilbinger/shear_bias
+git clone https://github.com/cosmostat/shear_bias
 ```
 
 A directory `shear_bias` is created. There, call the setup script to install the
@@ -42,21 +42,15 @@ the option `--prefix DIR` to install it in a directory `DIR` of your choice.
 
 The following packages should be installed:
   - `galsim` program
-  - `shapelens` library
-    Its installation requires the `cfitsio' and `tmv` libraries
 
 ## Content
 
   - `shear_bias`
     Python scripts with the shear_bias module functions and classes.
   - `notebooks`
-    Jupyter notebooks and auxilliary files
+    Jupyter notebooks
     - `shear_bias_example.ipynb`
-      Example notebook using galsim and KSB-shapelens
-    - `config/galsim`
-      Galsim configuration files (.yaml, to use with galsim on the command line)
-    - `src`
-      Contains `get_shapes.cc`, the source file for the KSB-shapelens executable.
+      Example notebook using galsim
 
 
 ## Reference
