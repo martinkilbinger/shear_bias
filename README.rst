@@ -33,7 +33,7 @@ A directory `shear_bias` is created. There, call the setup script to install the
 package.
 
 .. code-block:: bash
-`
+
         cd shear_bias
         python setup.py install
 
@@ -45,23 +45,23 @@ External programs and libraries
 -------------------------------
 
 The following packages should be installed:
-  - `galsim` program
+  - `galsim`
 
 Content
 =======
 
-  - ``shear_bias``
-    Python scripts with the shear_bias module functions and classes.
-  - ``notebooks``
-    Jupyter notebooks
-    - ``shear_bias_example.ipynb``
-      Example notebook using galsim
+        - ``shear_bias``
+          Python scripts with the shear_bias module functions and classes.
+        - ``notebooks``
+          Jupyter notebooks
+        - ``shear_bias_example.ipynb``
+          Example notebook using galsim
 
 
 Reference
 =========
 
-Pujol, Kilbinger, Sureau & Bobin (2018), `ref_arxiv`_ `ref_ads`_.
+Pujol, Kilbinger, Sureau & Bobin (2018) `arXiv`_ `ads`_.
 
-.. _ref_arXiv: https://arxiv.org/abs/1806.10537
-   _ref_ads: http://cdsads.u-strasbg.fr/abs/2018arXiv180610537P
+.. _arXiv: https://arxiv.org/abs/1806.10537
+   _ads: http://cdsads.u-strasbg.fr/abs/2018arXiv180610537P
