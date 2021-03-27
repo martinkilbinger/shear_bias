@@ -1,28 +1,30 @@
-# Shear bias
+##########
+Shear bias
+##########
 
-[![arXiv](https://img.shields.io/badge/arXiv-1806.10537-red.svg)](https://arxiv.org/abs/1806.10537)
+[arXiv]
+
+.. |arXiv| image:: https://img.shields.io/badge/arXiv-1806.10537-red.svg
+   :target: https://arxiv.org/abs/1806.10537
+
+
+:Version: 0.4
+
+:Date: March 2021
 
 `shear_bias` is a package that contains tools and scripts for shear bias
 estimation for weak gravitational lensing analysis.
 
-## Information
+Authors
+=======
+        - Martin Kilbinger `martin.kilbinger@cea.fr`
+        - Arnau Pujol `arnaupv@gmail.com`
 
-### Authors
-  - Martin Kilbinger `martin.kilbinger@cea.fr`
-  - Arnau Pujol `arnaupv@gmail.com`
-
-Version: 0.4
-
-Date: March 2021
-
-Documentation: TBD
-
-## Installation
+Installation
+============
 
 Download the code from the `github` repository.
-
 ```bash
-
 git clone https://github.com/cosmostat/shear_bias
 ```
 
@@ -38,12 +40,14 @@ You might have to use `sudo` in front of the setup command, if you have the root
 Alternatively, you can install the package from within a virtual environment, or use
 the option `--prefix DIR` to install it in a directory `DIR` of your choice.
 
-### External programs and libraries
+External programs and libraries
+-------------------------------
 
 The following packages should be installed:
   - `galsim` program
 
-## Content
+Content
+=======
 
   - `shear_bias`
     Python scripts with the shear_bias module functions and classes.
@@ -53,7 +57,8 @@ The following packages should be installed:
       Example notebook using galsim
 
 
-## Reference
+Reference
+=========
 
 Pujol, Kilbinger, Sureau & Bobin (2018),
 [arXiv:1806.10537](https://arxiv.org/abs/1806.10537),
