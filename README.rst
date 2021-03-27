@@ -2,7 +2,7 @@
 Shear bias
 ##########
 
-|arXiv| |pypi| |pypid|
+|arXiv| |pypi|
 
 .. |arXiv| image:: https://img.shields.io/badge/arXiv-1806.10537-red.svg
    :target: https://arxiv.org/abs/1806.10537
