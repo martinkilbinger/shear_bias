@@ -61,7 +61,7 @@ Content
 Reference
 =========
 
-Pujol, Kilbinger, Sureau & Bobin (2018) `arXiv`_ `ads`_.
+Pujol, Kilbinger, Sureau & Bobin (2018) arXiv_ ads_.
 
 .. _arXiv: https://arxiv.org/abs/1806.10537
    _ads: http://cdsads.u-strasbg.fr/abs/2018arXiv180610537P
