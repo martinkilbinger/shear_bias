@@ -51,12 +51,14 @@ Content
 =======
 
         - ``shear_bias``
+
           Python scripts with the shear_bias module functions and classes.
         - ``notebooks``
-          Jupyter notebooks
-        - ``shear_bias_example.ipynb``
-          Example notebook using galsim
 
+          Jupyter notebooks
+            - ``shear_bias_example.ipynb``
+
+              Example notebook using galsim
 
 Reference
 =========
@@ -64,4 +66,4 @@ Reference
 Pujol, Kilbinger, Sureau & Bobin (2018) arXiv_ ads_.
 
 .. _arXiv: https://arxiv.org/abs/1806.10537
-   _ads: http://cdsads.u-strasbg.fr/abs/2018arXiv180610537P
+.. _ads: http://cdsads.u-strasbg.fr/abs/2018arXiv180610537P
