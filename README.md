@@ -11,7 +11,7 @@ estimation for weak gravitational lensing analysis.
   - Martin Kilbinger `martin.kilbinger@cea.fr`
   - Arnau Pujol `arnaupv@gmail.com`
 
-Version: 0.1
+Version: 0.1 (with shapelens; obsolete)
 
 Date: November 2019
 
